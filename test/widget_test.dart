@@ -5,26 +5,20 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:semantics_playground_flutter/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('Test the Semantics tree', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    debugDumpSemanticsTree();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.bySemanticsLabel('A single text'), findsOneWidget);
+    expect(find.bySemanticsLabel('Semantics\nA regular semantics'), findsOneWidget);
+    expect(find.bySemanticsLabel('Semantics'), findsOneWidget);
+    expect(find.bySemanticsLabel('Semantics 1\nSemantics 2\nSemantics over Semantics'), findsOneWidget);
+    expect(find.bySemanticsLabel('Merged text 1\nMerged text 2'), findsOneWidget);
   });
 }
