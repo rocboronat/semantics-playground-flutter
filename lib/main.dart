@@ -44,6 +44,14 @@ class MainScreen extends StatelessWidget {
                 child: const Text("Semantics over Semantics"),
               ),
             ),
+            MergeSemantics(
+              child: Column(
+                children: const [
+                  Text("Merged text 1"),
+                  Text("Merged text 2"),
+                ],
+              ),
+            )
           ],
         ),
       ),
